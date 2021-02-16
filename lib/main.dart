@@ -157,85 +157,87 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.red,
-        title: Text("Calculator"),
-      ),
-      body: Container(
-        color: Colors.black,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Column(children: [
-              Container(
-                child: Text(
-                  "$textO",
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    color: Colors.yellowAccent,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.red,
+          title: Text("Calculator"),
+        ),
+        body: Container(
+          color: Colors.black,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Column(children: [
+                Container(
+                  child: Text(
+                    "$textO",
+                    style: TextStyle(
+                      fontSize: 45.0,
+                      color: Colors.yellowAccent,
+                    ),
                   ),
+                  alignment: Alignment.bottomRight,
+                  padding: EdgeInsets.only(bottom: 10, right: 15),
                 ),
-                alignment: Alignment.bottomRight,
-                padding: EdgeInsets.only(bottom: 10, right: 15),
-              ),
-              Container(
-                child: Text(
-                  "$textToDisplay",
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    color: Colors.yellowAccent,
+                Container(
+                  child: Text(
+                    "$textToDisplay",
+                    style: TextStyle(
+                      fontSize: 45.0,
+                      color: Colors.yellowAccent,
+                    ),
                   ),
+                  alignment: Alignment.bottomRight,
+                  padding: EdgeInsets.only(bottom: 10, right: 15),
                 ),
-                alignment: Alignment.bottomRight,
-                padding: EdgeInsets.only(bottom: 10, right: 15),
+              ]),
+              Divider(
+                color: Colors.yellow,
+                thickness: 1.5,
               ),
-            ]),
-            Divider(
-              color: Colors.yellow,
-              thickness: 1.5,
-            ),
-            Row(
-              children: [
-                template("C"),
-                template("√"),
-                template("%"),
-                template("/"),
-              ],
-            ),
-            Row(
-              children: [
-                template("7"),
-                template("8"),
-                template("9"),
-                template("x"),
-              ],
-            ),
-            Row(
-              children: [
-                template("4"),
-                template("5"),
-                template("6"),
-                template("-"),
-              ],
-            ),
-            Row(
-              children: [
-                template("1"),
-                template("2"),
-                template("3"),
-                template("+"),
-              ],
-            ),
-            Row(
-              children: [
-                template("D"),
-                template("0"),
-                template("."),
-                template("="),
-              ],
-            ),
-          ],
+              Row(
+                children: [
+                  template("C"),
+                  template("√"),
+                  template("%"),
+                  template("/"),
+                ],
+              ),
+              Row(
+                children: [
+                  template("7"),
+                  template("8"),
+                  template("9"),
+                  template("x"),
+                ],
+              ),
+              Row(
+                children: [
+                  template("4"),
+                  template("5"),
+                  template("6"),
+                  template("-"),
+                ],
+              ),
+              Row(
+                children: [
+                  template("1"),
+                  template("2"),
+                  template("3"),
+                  template("+"),
+                ],
+              ),
+              Row(
+                children: [
+                  template("D"),
+                  template("0"),
+                  template("."),
+                  template("="),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
