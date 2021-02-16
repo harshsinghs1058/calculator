@@ -5,6 +5,8 @@
  - it also has clear screen and delete single number button
  - we can use this calculator with 15 digit numbers
  - it show a toast if we try to enter number consist of more than 15 digits
+# Screenshots
+![screenshot1](https://raw.githubusercontent.com/harshsinghs1058/calculator/master/screenshots/c2.png)
 ## Getting Started
 
 This project is a starting point for a Flutter application.
