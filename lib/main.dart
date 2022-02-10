@@ -34,58 +34,62 @@ class _HomepageState extends State<Homepage> {
       child: Container(
         height: 85.0,
         padding: EdgeInsets.all(10.0),
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: () {
             if (i == "+" || i == "-" || i == "x" || i == "/" || i == "%") {
-              temp = 0;
-              if (textToDisplay != "" && textO != "") {
-                num2 = double.parse(textToDisplay);
-                double ans;
-                if (i == "+") {
-                  ans = num1 + num2;
-                } else if (i == "-") {
-                  ans = num1 - num2;
-                } else if (i == "x") {
-                  ans = num1 * num2;
-                } else if (i == "/") {
-                  ans = num1 / num2;
-                } else if (i == "%") {
-                  ans = (num1 * num2) / 100;
-                }
-                if (ans < 10000000000 && ans > -10000000000) {
-                  if (ans != ans.toInt())
-                    textO = (ans).toStringAsFixed(3);
-                  else
-                    textO = (ans).toInt().toString();
-                } else
-                  textO = (ans).toStringAsExponential(3);
-                textO += i;
-                opr = i;
-                textToDisplay = "";
-              } else if (textToDisplay != "") {
-                input = 0;
-                opr = i;
-                if (textToDisplay == "-") {
-                  textToDisplay += "1";
-                }
-                num1 = double.parse(textToDisplay);
+              if (input > 0 || textO != 0) {
+                temp = 0;
+                if (textToDisplay != "" && textO != "") {
+                  num2 = double.parse(textToDisplay);
+                  double ans;
+                  if (i == "+") {
+                    ans = num1 + num2;
+                  } else if (i == "-") {
+                    ans = num1 - num2;
+                  } else if (i == "x") {
+                    ans = num1 * num2;
+                  } else if (i == "/") {
+                    ans = num1 / num2;
+                  } else if (i == "%") {
+                    ans = (num1 * num2) / 100;
+                  }
+                  if (ans < 10000000000 && ans > -10000000000) {
+                    if (ans != ans.toInt())
+                      textO = (ans).toStringAsFixed(3);
+                    else
+                      textO = (ans).toInt().toString();
+                  } else
+                    textO = (ans).toStringAsExponential(3);
+                  textO += i;
+                  opr = i;
+                  textToDisplay = "";
+                } else if (textToDisplay != "") {
+                  input = 0;
+                  opr = i;
+                  if (textToDisplay == "-") {
+                    textToDisplay += "1";
+                  }
+                  num1 = double.parse(textToDisplay);
 
-                if (num1 < 10000000000 && num1 > -10000000000) {
-                  if (num1 == num1.toInt())
-                    textO = (num1).toInt().toString();
-                  else
-                    textO = num1.toStringAsFixed(3);
-                } else
-                  textO = (num1).toStringAsExponential(3);
-                textO += opr;
-                textToDisplay = "";
-              } else {
-                opr = i;
-                textO = textO.substring(0, textO.length - 1);
-                textO += opr;
+                  if (num1 < 10000000000 && num1 > -10000000000) {
+                    if (num1 == num1.toInt())
+                      textO = (num1).toInt().toString();
+                    else
+                      textO = num1.toStringAsFixed(3);
+                  } else
+                    textO = (num1).toStringAsExponential(3);
+                  textO += opr;
+                  textToDisplay = "";
+                } else {
+                  opr = i;
+                  textO = textO.substring(0, textO.length - 1);
+                  textO += opr;
+                }
               }
             } else if (i == "√") {
-              textToDisplay = sqrt(int.parse(textToDisplay)).toStringAsFixed(3);
+              if (input > 0)
+                textToDisplay =
+                    sqrt(int.parse(textToDisplay)).toStringAsFixed(3);
             } else if (i == "=") {
               if (textO != "" && textToDisplay == "") {
               } else {
@@ -125,9 +129,11 @@ class _HomepageState extends State<Homepage> {
               opr = "";
               textO = "";
             } else if (i == "D") {
-              input--;
-              textToDisplay =
-                  textToDisplay.substring(0, textToDisplay.length - 1);
+              if (input > 0) {
+                input--;
+                textToDisplay =
+                    textToDisplay.substring(0, textToDisplay.length - 1);
+              }
             } else {
               if (input > 13) {
                 Fluttertoast.showToast(
@@ -145,11 +151,19 @@ class _HomepageState extends State<Homepage> {
             }
             setState(() {});
           },
-          color: Colors.blue[300],
-          padding: EdgeInsets.all(1.0),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
-          child: Text("$i", style: TextStyle(fontSize: 45.0)),
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18.0)),
+            padding: EdgeInsets.all(1.0),
+            onPrimary: Colors.blue[300],
+          ),
+          child: Text(
+            "$i",
+            style: TextStyle(
+              fontSize: 45.0,
+              color: Colors.white,
+            ),
+          ),
         ),
       ),
     );
@@ -168,35 +182,38 @@ class _HomepageState extends State<Homepage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              Column(children: [
-                Container(
-                  child: Text(
-                    "$textO",
-                    style: TextStyle(
-                      fontSize: 45.0,
-                      color: Colors.yellowAccent,
+              Column(
+                children: [
+                  Container(
+                    child: Text(
+                      "$textO",
+                      style: TextStyle(
+                        fontSize: 45.0,
+                        color: Colors.yellowAccent,
+                      ),
                     ),
+                    alignment: Alignment.bottomRight,
+                    padding: EdgeInsets.only(bottom: 10, right: 15),
                   ),
-                  alignment: Alignment.bottomRight,
-                  padding: EdgeInsets.only(bottom: 10, right: 15),
-                ),
-                Container(
-                  child: Text(
-                    "$textToDisplay",
-                    style: TextStyle(
-                      fontSize: 45.0,
-                      color: Colors.yellowAccent,
+                  Container(
+                    child: Text(
+                      "$textToDisplay",
+                      style: TextStyle(
+                        fontSize: 45.0,
+                        color: Colors.yellowAccent,
+                      ),
                     ),
+                    alignment: Alignment.bottomRight,
+                    padding: EdgeInsets.only(bottom: 10, right: 15),
                   ),
-                  alignment: Alignment.bottomRight,
-                  padding: EdgeInsets.only(bottom: 10, right: 15),
-                ),
-              ]),
+                ],
+              ),
               Divider(
                 color: Colors.yellow,
                 thickness: 1.5,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   template("C"),
                   template("√"),
@@ -205,6 +222,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   template("7"),
                   template("8"),
@@ -213,6 +231,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   template("4"),
                   template("5"),
@@ -221,6 +240,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   template("1"),
                   template("2"),
@@ -229,6 +249,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   template("D"),
                   template("0"),
