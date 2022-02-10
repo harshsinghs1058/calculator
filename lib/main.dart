@@ -33,7 +33,8 @@ class _HomepageState extends State<Homepage> {
     return Flexible(
       child: Container(
         height: 85.0,
-        padding: EdgeInsets.all(10.0),
+        width: MediaQuery.of(context).size.width / 5,
+        padding: EdgeInsets.symmetric(vertical: 10.0),
         child: ElevatedButton(
           onPressed: () {
             if (i == "+" || i == "-" || i == "x" || i == "/" || i == "%") {
@@ -213,7 +214,7 @@ class _HomepageState extends State<Homepage> {
                 thickness: 1.5,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   template("C"),
                   template("√"),
@@ -222,7 +223,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   template("7"),
                   template("8"),
@@ -231,7 +232,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   template("4"),
                   template("5"),
@@ -240,7 +241,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   template("1"),
                   template("2"),
@@ -249,7 +250,7 @@ class _HomepageState extends State<Homepage> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   template("D"),
                   template("0"),
